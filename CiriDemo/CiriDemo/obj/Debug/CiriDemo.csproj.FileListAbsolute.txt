@@ -40,3 +40,6 @@ F:\Ciri.DesktopClient\Ciri.Layout\Ciri-Client\CiriDemo\CiriDemo\bin\Debug\zh-Han
 F:\Ciri.DesktopClient\Ciri.Layout\Ciri-Client\CiriDemo\CiriDemo\obj\Debug\App.baml
 F:\Ciri.DesktopClient\Ciri.Layout\Ciri-Client\CiriDemo\CiriDemo\obj\Debug\TBMyChatBoxControl.baml
 F:\Ciri.DesktopClient\Ciri.Layout\Ciri-Client\CiriDemo\CiriDemo\obj\Debug\TBMyChatBoxControl.g.cs
+C:\Users\mars\Documents\GitHub\Ciri.Client\CiriDemo\CiriDemo\bin\Debug\CiriDemo.exe.config
+C:\Users\mars\Documents\GitHub\Ciri.Client\CiriDemo\CiriDemo\obj\Debug\CiriDemo.exe
+C:\Users\mars\Documents\GitHub\Ciri.Client\CiriDemo\CiriDemo\obj\Debug\CiriDemo.pdb
