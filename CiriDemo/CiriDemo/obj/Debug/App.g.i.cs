@@ -74,6 +74,8 @@ namespace CiriDemo {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.0.0.0")]
         public static void Main() {
+            SplashScreen splashScreen = new SplashScreen("logo-tailed.png");
+            splashScreen.Show(true);
             CiriDemo.App app = new CiriDemo.App();
             app.InitializeComponent();
             app.Run();

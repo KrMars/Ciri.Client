@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:CiriDemo"
         xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="CiriDemo.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+        Title="Ciri" Height="350" Width="525" Icon="logo2.ico"
         AllowsTransparency="True" WindowStyle="None" OpacityMask="White" Background="Transparent">
 	<Window.Resources>
 		<Storyboard x:Key="OnMouseEnter1"/>

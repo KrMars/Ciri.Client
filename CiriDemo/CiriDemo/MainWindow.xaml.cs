@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Threading;
 
 namespace CiriDemo
 {
@@ -24,6 +25,10 @@ namespace CiriDemo
     {
         private string userName = "Elendil Zheng";
         private NotifyIcon notifyIcon = null;
+        DispatcherTimer icoTimer = new DispatcherTimer();
+        string icoUrl = @"logo.ico";
+        string icoUrl2 = @"Exclamation.ico";
+        public long i = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -32,9 +37,10 @@ namespace CiriDemo
             this.TBMyChat.KeyDown += TBMyChat_KeyDown;
             this.TBMyChat.KeyUp += TBMyChat_KeyUp;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            InitialTray();
+            
         }
 
+        #region Main Window
         void TBMyChat_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
@@ -94,6 +100,7 @@ namespace CiriDemo
         private void Image_MouseDown_2(object sender, MouseButtonEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+            InitialTray();
         }
 
         private void IMGChat_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -127,15 +134,15 @@ namespace CiriDemo
             //    this.TBCiriChat.UpdateLayout();
             //}
         }
-
+        #endregion Main Window
         private void InitialTray()
         {
-            //隐藏主窗体
+            //Hidden window
             this.Visibility = Visibility.Hidden;
 
-            //设置托盘的各个属性
+            //Set property
             notifyIcon = new NotifyIcon();
-            notifyIcon.BalloonTipText = "Ciri running...";
+            notifyIcon.BalloonTipText = "New task!";
             notifyIcon.Text = "Ciri";
             //notifyIcon.Icon = System.Drawing.Icon.ExtractAssociatedIcon(System.Windows.Forms.Application.ExecutablePath);
             notifyIcon.Icon = new System.Drawing.Icon(@"logo.ico");
@@ -143,37 +150,50 @@ namespace CiriDemo
             notifyIcon.ShowBalloonTip(2000);
             notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(notifyIcon_MouseClick);
 
-            //设置菜单项
-            System.Windows.Forms.MenuItem setting1 = new System.Windows.Forms.MenuItem("setting1");
-            System.Windows.Forms.MenuItem setting2 = new System.Windows.Forms.MenuItem("setting2");
-            System.Windows.Forms.MenuItem setting = new System.Windows.Forms.MenuItem("setting", new System.Windows.Forms.MenuItem[] { setting1, setting2 });
+            //Set menu
+            System.Windows.Forms.MenuItem training1 = new System.Windows.Forms.MenuItem("training1");
+            System.Windows.Forms.MenuItem training2 = new System.Windows.Forms.MenuItem("training2");
+            System.Windows.Forms.MenuItem training = new System.Windows.Forms.MenuItem("Training", new System.Windows.Forms.MenuItem[] { training1, training2 });
 
-            //帮助选项
-            System.Windows.Forms.MenuItem help = new System.Windows.Forms.MenuItem("help");
+            //Help
+            System.Windows.Forms.MenuItem help = new System.Windows.Forms.MenuItem("Help");
 
-            //关于选项
-            System.Windows.Forms.MenuItem about = new System.Windows.Forms.MenuItem("about");
-
-            //退出菜单项
-            System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("exit");
+            //Exit
+            System.Windows.Forms.MenuItem exit = new System.Windows.Forms.MenuItem("Exit");
             exit.Click += new EventHandler(exit_Click);
 
-            //关联托盘控件
-            System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] { setting, help, about, exit };
+            System.Windows.Forms.MenuItem[] childen = new System.Windows.Forms.MenuItem[] { training, help, exit };
             notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu(childen);
 
-            //窗体状态改变时候触发
+            //Trigger it when window change
             this.StateChanged += new EventHandler(SysTray_StateChanged);
+
+            icoTimer.Interval = TimeSpan.FromSeconds(0.7);
+            icoTimer.Tick += new EventHandler(IcoTimer_Tick);
+            icoTimer.Start();
+        }
+
+        private void IcoTimer_Tick(object sender, EventArgs e)
+        {
+            i = i + 1;
+            if(i %2 !=0)
+            {
+                this.notifyIcon.Icon = new System.Drawing.Icon(icoUrl);
+            }
+            else
+            {
+                this.notifyIcon.Icon = new System.Drawing.Icon(icoUrl2);
+            }
         }
 
         /// <summary>
-        /// 鼠标单击
+        /// Click
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void notifyIcon_MouseClick(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            //如果鼠标左键单击
+            //Left Click
             if (e.Button == MouseButtons.Left)
             {
                 if (this.Visibility == Visibility.Visible)
@@ -189,7 +209,7 @@ namespace CiriDemo
         }
 
         /// <summary>
-        /// 窗体状态改变时候触发
+        ///Trigger it when window change
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -203,7 +223,7 @@ namespace CiriDemo
 
 
         /// <summary>
-        /// 退出选项
+        /// Exit
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
